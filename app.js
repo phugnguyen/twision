@@ -30,8 +30,7 @@ app.get("/", (request, res) => {
 });
 
 app.get("/twitter", (request, response) => {
-  twitter.getSearch({ q: "#haiku", count: 10 }, error, success);
-  response.send("twitter stuff was successful...");
+  twitter.getSearch({ q: "#haiku" }, error, data => response.send(data));
 });
 
 // create route to get single book by its isbn
