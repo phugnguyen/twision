@@ -1,23 +1,37 @@
-const axios = require('axios');
+const axios = require("axios");
 
-document.addEventListener('DOMContentLoaded', () => {
+// add tag to .search-tags and clear text from search bar
+document.addEventListener("DOMContentLoaded", () => {
+  const searchSet = new Set();
 
-    let isbn = '0201558025';
-    axios.get(`/books/${isbn}`)
-    .then((response) => {
-        console.log(response); 
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+  document.getElementById("tags-btn").addEventListener("click", e => {
+    const text = document.getElementById("add-tags-bar").value;
+    // TODO: add more robust error handling
+    if (text === "" || searchSet.has(text)) return;
+    searchSet.add(text);
+    const tag = document.createElement("DIV");
+    tag.innerText = text;
+    document.getElementById("search-tags").appendChild(tag);
+    document.getElementById("add-tags-bar").value = "";
+  });
 
-    let query = "grace hopper";
-    axios.get(`/search?string=${query}`)
-    .then((response) => {
+  document.getElementById("analyze-tags-btn").addEventListener("click", e => {
+    if (searchSet.size < 2) return;
+
+    // send searchSet back as a get request to backend
+    axios
+      .get(`/twitter`, {
+        params: {
+          searchSet: "...sendingPotato"
+        }
+      })
+      .then(response => {
         console.log(response);
-    })
-    .catch(function (error) {
+      })
+      .catch(function(error) {
         console.log(error);
-    });
-    
-})
+      });
+    // have backend send the data D3.js and render the 2-3
+    // svg charts
+  });
+});
