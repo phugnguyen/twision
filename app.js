@@ -1,4 +1,5 @@
 const express = require("express");
+var bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
@@ -6,12 +7,18 @@ const PORT = process.env.PORT || 8000; // process.env accesses heroku's environm
 
 app.use(express.static("public"));
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
 app.get("/", (request, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 app.get("/twitter", (request, response) => {
-  console.log("Potato Received");
+  console.log(request.query.string);
   response.send("POTATO RECEIVED");
 });
 

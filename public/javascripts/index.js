@@ -20,11 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // send searchSet back as a get request to backend
     axios
-      .get(`/twitter`, {
-        params: {
-          searchSet: "...sendingPotato"
-        }
-      })
+      .get(`/twitter?string=${Array.from(searchSet).join(" ")}`)
       .then(response => {
         console.log(response);
       })
