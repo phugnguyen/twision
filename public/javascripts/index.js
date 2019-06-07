@@ -16,11 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("analyze-tags-btn").addEventListener("click", e => {
+    // wait for two items to compare
     if (searchSet.size < 2) return;
 
     // send searchSet back as a get request to backend
     axios
-      .get(`/twitter?string=${Array.from(searchSet).join(" ")}`)
+      .get(`/twitter?string=${Array.from(searchSet).join("+")}`)
       .then(response => {
         console.log(response);
       })

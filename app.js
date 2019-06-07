@@ -1,8 +1,9 @@
 const express = require("express");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
+const Twitter = require("twitter-node-client").Twitter;
 const PORT = process.env.PORT || 8000; // process.env accesses heroku's environment variables
 
 app.use(express.static("public"));
