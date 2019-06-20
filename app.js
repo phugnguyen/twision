@@ -34,11 +34,12 @@ app.get("/", (request, res) => {
 
 app.get("/api/twitter", (request, response) => {
   const stream = twit.stream("statuses/filter", {
-    track: `${request.query.string}`
+    track: `${request.query.string}`,
+    language: `en`
   });
 
   stream.on("tweet", tweet => {
-    console.log(tweet);
+    console.log(tweet.text + "\n");
   });
 });
 
