@@ -23,14 +23,18 @@
     "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "hawk": "^7.0.10",
+    "is-odd": "^3.0.1",
     "node-fetch": "^1.7.3",
     "node-sass": "^4.12.0",
     "sass-loader": "^6.0.7",
+    "set-immediate-shim": "^2.0.0",
+    "stringstream": "^1.0.0",
     "twit": "^2.2.11",
-    "twitter-node-client": "0.0.6",
-    "webpack": "^3.12.0"
+    "twitter-node-client": "0.0.6"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "webpack": "^3.12.0"
   }
 }

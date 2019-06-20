@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // send searchSet back as a get request to backend
     axios
-      .get(`/twitter?string=${Array.from(searchSet).join("+")}`)
+      .get(`/api/twitter?string=${Array.from(searchSet).join(" OR ")}`)
       .then(response => {
         console.log(response);
       })

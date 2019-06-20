@@ -6,6 +6,8 @@ const fetch = require("node-fetch");
 const Twitter = require("twitter-node-client").Twitter;
 const PORT = process.env.PORT || 8000; // process.env accesses heroku's environment variables
 const config = require("./data/twitter_config");
+const twitconfig = require("./data/twit_config");
+const Twit = require("twit");
 
 //Callback functions
 const error = function(err, response, body) {
@@ -16,6 +18,7 @@ const success = function(data) {
 };
 
 const twitter = new Twitter(config);
+const twit = new Twit(twitconfig);
 
 app.use(express.static("public"));
 
@@ -30,7 +33,11 @@ app.get("/", (request, res) => {
 });
 
 app.get("/twitter", (request, response) => {
-  twitter.getSearch({ q: "#haiku" }, error, data => response.send(data));
+  console.log(request.query.string);
+  const queryString = request.query.string;
+  twitter.getSearch({ q: `${queryString}` }, error, data =>
+    response.send(data)
+  );
 });
 
 // create route to get single book by its isbn
