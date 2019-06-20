@@ -3,13 +3,13 @@ const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
-const Twitter = require("twitter-node-client").Twitter;
 const PORT = process.env.PORT || 8000; // process.env accesses heroku's environment variables
-const config = require("./data/twitter_config");
+// const Twitter = require("twitter-node-client").Twitter;
+// const config = require("./data/twitter_config");
 const twitconfig = require("./data/twit_config");
 const Twit = require("twit");
 
-//Callback functions
+// Callback functions
 const error = function(err, response, body) {
   console.log("ERROR [%s]", err);
 };
@@ -17,7 +17,7 @@ const success = function(data) {
   console.log("Data [%s]", data);
 };
 
-const twitter = new Twitter(config);
+// const twitter = new Twitter(config);
 const twit = new Twit(twitconfig);
 
 app.use(express.static("public"));
@@ -32,12 +32,14 @@ app.get("/", (request, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
-app.get("/twitter", (request, response) => {
-  console.log(request.query.string);
-  const queryString = request.query.string;
-  twitter.getSearch({ q: `${queryString}` }, error, data =>
-    response.send(data)
-  );
+app.get("/api/twitter", (request, response) => {
+  const stream = twit.stream("statuses/filter", {
+    track: `${request.query.string}`
+  });
+
+  stream.on("tweet", tweet => {
+    console.log(tweet);
+  });
 });
 
 // create route to get single book by its isbn

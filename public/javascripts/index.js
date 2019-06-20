@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // send searchSet back as a get request to backend
     axios
-      .get(`/api/twitter?string=${Array.from(searchSet).join(" OR ")}`)
+      .get(`/api/twitter?string=${Array.from(searchSet).join(",")}`)
       .then(response => {
         console.log(response);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
       });
     // have backend send the data D3.js and render the 2-3
