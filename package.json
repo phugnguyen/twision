@@ -29,6 +29,7 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^6.0.7",
     "set-immediate-shim": "^2.0.0",
+    "socket.io": "^2.2.0",
     "stringstream": "^1.0.0",
     "twit": "^2.2.11",
     "twitter-node-client": "0.0.6"

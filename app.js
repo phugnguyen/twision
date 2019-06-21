@@ -22,14 +22,34 @@ app.get("/", (request, res) => {
 });
 
 app.get("/api/twitter", (request, response) => {
+  // allows for multiple streams
+  const queryArr = request.query.string.split(",");
   const stream = twit.stream("statuses/filter", {
-    track: `${request.query.string}`,
+    track: `${queryArr[0]}`,
     language: `en`
   });
 
-  stream.on("tweet", tweet => {
-    console.log(tweet.text + "\n");
+  const stream2 = twit.stream("statuses/filter", {
+    track: `${queryArr[1]}`,
+    language: `en`
   });
+
+  let count = 0;
+  let count2 = 0;
+
+  stream.on("tweet", tweet => {
+    console.log(
+      queryArr[0] + `: ` + count++ + ` ${queryArr[1]}: ${count2}` + "\n"
+    );
+  });
+
+  stream2.on("tweet", tweet => {
+    console.log(
+      queryArr[0] + `: ` + count + ` ${queryArr[1]}: ` + count2++ + "\n"
+    );
+  });
+
+  console.log("DONE");
 });
 
 app.listen(PORT, () => {
