@@ -48,8 +48,6 @@ app.get("/api/twitter", (request, response) => {
       queryArr[0] + `: ` + count + ` ${queryArr[1]}: ` + count2++ + "\n"
     );
   });
-
-  console.log("DONE");
 });
 
 app.listen(PORT, () => {
