@@ -26,7 +26,7 @@
     "hawk": "^7.0.10",
     "is-odd": "^3.0.1",
     "node-fetch": "^1.7.3",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "sass-loader": "^6.0.7",
     "set-immediate-shim": "^2.0.0",
     "socket.io": "^2.2.0",
